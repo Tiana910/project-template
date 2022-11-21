@@ -1,6 +1,18 @@
 import { renderBlock } from './lib.js'
 
+export class User {
+  nameUser: string
+  avatarLink: string
+  favoriteItemsAmount: number
+  constructor (nameUser: string, avatarLink: string, favoriteItemsAmount?: number) {
+    this.nameUser = nameUser
+    this.avatarLink = avatarLink
+    this.favoriteItemsAmount = favoriteItemsAmount
+  }
+  }
+  
 export function renderUserBlock (nameUser:string, avatarLink:string, favoriteItemsAmount?:number) {
+
   const favoritesCaption = favoriteItemsAmount <1 ? 'ничего нет' : favoriteItemsAmount  
   const hasFavoriteItems = favoriteItemsAmount<1 ? false :true 
 

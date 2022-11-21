@@ -5,5 +5,7 @@ export function getUserData(key: unknown) {
 }
 
 export function getFavoritesAmount(key:unknown){
-    
+    if (typeof key == "string" && typeof +localStorage[key] == "number") {
+        return localStorage[key]
+    }
 }

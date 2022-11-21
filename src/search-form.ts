@@ -1,22 +1,37 @@
 import { renderBlock } from './lib.js'
 
-function formatedDate(date:Date):string {
-  return date.toLocaleDateString()
+export interface SearchFormData {
+  checkInDate: string,
+  checkOutDate: string
+}
+function formatedDate(date: Date): string {
+  return date.toISOString().slice(0, 10);
 }
 
-export function renderSearchFormBlock (
-  checkInDate:Date = new Date(Date.now() + 24*60*60*1000), 
-  checkOutDate:Date = new Date(+checkInDate + 24*60*60*1000*2) 
-):void {
+export function search(value: SearchFormData) {
+  console.log(value);
+}
 
-  const dayCheckInDate = formatedDate(checkInDate);
-  const dayCheckOutDate = formatedDate(checkOutDate) ;
+export function formhandler(callback, searchHandler) {
+  document.querySelector('form').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const data: SearchFormData = {
+      checkInDate: event.target['check-in-date'].value,
+      checkOutDate: event.target['check-out-date'].value,
+    }
+    callback(data, searchHandler);
+  });
+}
+
+export function renderSearchFormBlock(
+  checkInDate: Date = new Date(Date.now() + 24 * 60 * 60 * 1000),
+  checkOutDate: Date = new Date(+checkInDate + 24 * 60 * 60 * 1000 * 2)
+): void {
   const today = new Date();
   const minDate = formatedDate(today);
-  const maxDate = formatedDate(new Date(today.getFullYear(), today.getMonth() + 2, 0 + 1))
-
-
-
+  const maxDate = formatedDate(new Date(today.getFullYear(), today.getMonth() + 2, 0 + 1));
+  const formatedCheckInDate = formatedDate(checkInDate);
+  const formatedCheckOutDate = formatedDate(checkOutDate);
 
   renderBlock(
     'search-form-block',
@@ -36,12 +51,12 @@ export function renderSearchFormBlock (
         </div>
         <div class="row">
           <div>
-            <label for="check-in-date">Дата заезда</label>
-            <input id="check-in-date" type="date" value="${dayCheckInDate}" min="${minDate}" max="${maxDate}" name="checkin" />
+            <label for="check-in-date">Дата заезда</label>            
+            <input id="check-in-date" type="date" value="${checkInDate}" min="${minDate}" max="${maxDate}" name="checkin" />
           </div>
           <div>
             <label for="check-out-date">Дата выезда</label>
-            <input id="check-out-date" type="date" value="${dayCheckOutDate}" min="${minDate}" max="${maxDate}" name="checkout" />
+            <input id="check-out-date" type="date" value="${checkOutDate}" min="${minDate}" max="${maxDate}" name="checkout" />
           </div>
           <div>
             <label for="max-price">Макс. цена суток</label>
