@@ -1,5 +1,5 @@
 {
-    "compilerOption": {
+    "compilerOptions": {
         "outDir": "public/scripts",
         "target": "es2015",
         "module": "es2015",

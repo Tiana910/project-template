@@ -2,7 +2,7 @@ import { renderSearchFormBlock, formhandler, search } from './search-form.js'
 import { renderSearchStubBlock } from './search-results.js'
 import { renderUserBlock, User } from './user.js'
 import { renderToast } from './lib.js'
-import { getUserData, getFavoritesAmount } from './localStorage'
+import { getUserData, getFavoritesAmount } from './localStorage.js'
 
 window.addEventListener('DOMContentLoaded', () => {
 
@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const avatarLink = user.avatarLink;
   const favoriteItemsAmount = getFavoritesAmount('user.favoriteItemsAmount');
 
-  renderUserBlock("nameUser", "avatarLink", 0)
+  renderUserBlock(nameUser, avatarLink, 0)
   renderSearchFormBlock()
   renderSearchStubBlock()
   renderToast(
